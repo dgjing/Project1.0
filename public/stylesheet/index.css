@@ -98,3 +98,34 @@ html,body{
 	margin:10px auto;
 }
 /******折线图***/
+
+
+/*开始监控start*/
+.flex {
+	display: flex;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.line {
+	padding: 1rem;
+}
+
+.title {
+	background-color: rgba(135, 135, 135, 1);
+	color: white;
+	vertical-align: middle;
+	font-size: 1.4rem;
+	padding: .7rem 0 .7rem 1.2rem;
+	border-top: 1px solid rgba(240, 240, 240, 1);
+	border-left: 1px solid rgba(240, 240, 240, 1);
+	border-right: 1px solid rgba(240, 240, 240, 1);
+}
+
+.set-wrapper {
+	margin: 2rem 1rem;
+}
+
+/*开始监控end*/
