@@ -9,7 +9,8 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
             if (!res.data["network-topology"].topology[0].link) {
                 return;
             }
-            $scope.filterData(res.data["network-topology"].topology[0].link);
+            $scope.topologyData = $scope.filterData(res.data["network-topology"].topology[0].link);
+            console.log($scope.topologyData);
         }, function errorFun(res) {
             console.log(res);
         });
@@ -21,14 +22,22 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
         }
         var des, source;
         var reg = /^openflow:/;
-        data = data.filter(function (item) {
+        var nodeArr = {};
+        data.map(function (item) {
             des = item.destination["dest-node"] || "";
             source = item.source["source-node"] || "";
-            console.log(des);
-            console.log(source);
-            return reg.test(des) && reg.test(source);
+            if (reg.test(des) && reg.test(source)) {
+                if (!nodeArr[source]) {
+                    nodeArr[source] = [];
+                    nodeArr[source].push(des);
+                } else {
+                    if($.inArray(des, nodeArr[source]) == -1){
+                        nodeArr[source].push(des);
+                    }
+                }
+            }
         });
-        console.log(data);
+        return nodeArr;
     };
     $scope.getSourceNode();
 });

@@ -8,17 +8,16 @@
                 </div>
                 <div class="line">
                     <span>源</span>
-                    <select>
-                        <option>1</option>
+                    <select ng-model="sourceData" ng-options="x for (x,y) in topologyData">
                     </select>
                 </div>
                 <div class="line">
                     <span>目的</span>
-                    <select>
-                        <option>2</option>
+                    <select ng-options="y for (x, y) in sourceData">
                     </select>
                 </div>
                 <div class="line">
+                    {{sourceData}}
                     <input type="radio" value="all"/> <label>全选</label>
                 </div>
             </div>
