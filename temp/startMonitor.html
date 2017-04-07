@@ -4,7 +4,7 @@
         <div class="flex link-wrapper">
             <div class="flex column">
                 <div class="line">
-                    <input type="radio" value="sigle"/> <label>单选</label>
+                    <input type="radio" value="single" name="linkBtn" ng-model="linkType"/> <label>单选</label>
                 </div>
                 <div class="line">
                     <span>源</span>
@@ -13,18 +13,25 @@
                 </div>
                 <div class="line">
                     <span>目的</span>
-                    <select ng-options="y for (x, y) in sourceData">
+                    <select ng-model="desValue" ng-options="i for i in sourceData.second">
                     </select>
                 </div>
                 <div class="line">
-                    {{sourceData}}
-                    <input type="radio" value="all"/> <label>全选</label>
+                    <input type="radio" value="all" name="linkBtn" ng-model="linkType"/> <label>全选</label>
+                </div>
+                <div class="line">
+                    <button ng-click="confirmLink()">确定</button>
                 </div>
             </div>
             <div>
                 <span>已选择</span>
-                <textarea>s</textarea>
-                <span>共</span>
+                <ul>
+                    <li ng-repeat="item in chooseLinkArr">{{item}}
+                        <button ng-click="delCurrItem(item)">删除</button>
+                    </li>
+                </ul>
+
+                <span>共 {{chooseLinkArr.length}} 条</span>
             </div>
             <div></div>
         </div>
@@ -33,17 +40,23 @@
         <h1 class="title">选项（可多选）</h1>
         <div>
             <div class="line">
-                <input type="checkbox" name="op" value="1"/> <label>速率</label>
-                <input type="checkbox" name="op" value="2"/> <label>丢包率</label>
-                <input type="checkbox" name="op" value="3"/> <label>延迟</label>
+                <input type="checkbox" ng-model="monitorParas.speed" ng-true-value="true" ng-false-value="false"/>
+                <label>速率</label>
+                <input type="checkbox" ng-model="monitorParas.loss" ng-true-value="true" ng-false-value="false"/>
+                <label>丢包率</label>
+                <input type="checkbox" ng-model="monitorParas.delay" ng-true-value="true" ng-false-value="false"/>
+                <label>延迟</label>
             </div>
-            <div class="line"><span>more</span></div>
             <div class="line">
-                <input type="checkbox" name="op" value="4"/> <label>速率</label>
-                <input type="checkbox" name="op" value="5"/> <label>丢包率</label>
-                <input type="checkbox" name="op" value="6"/> <label>延迟</label>
+                <button ng-click="toggleMoreParas()" ng-hide="moreParas">查看更多</button>
+                <button ng-click="toggleMoreParas()" ng-hide="!moreParas">折叠</button>
+            </div>
+            <div class="line" ng-show="moreParas">
+                <input type="checkbox" ng-model="monitorParas.par1"/> <label>参数1</label>
+                <input type="checkbox" ng-model="monitorParas.par2"/> <label>参数2</label>
+                <input type="checkbox" ng-model="monitorParas.par3"/> <label>参数3</label>
             </div>
         </div>
     </div>
-    <input type="button" value="start"/>
+    <button ng-click="startMonitor()">开始</button>
 </div>
