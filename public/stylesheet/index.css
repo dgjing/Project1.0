@@ -5,13 +5,13 @@
  * @date    2017-03-23 13:54:06
  * @version $Id$
  */
-html,body{		
+html,body{
 	height:100%;
 	position: relative;
 	display: flex;
 	width:100%;
 }
-* {  
+* {
 	font-size: 14px;
 	margin:0px;
 	padding:0px;
@@ -25,7 +25,7 @@ html,body{
 }
 .sidebar ul{
 	width:100%;
-} 
+}
 .sidebar ul li{
 	text-align: center;
 	list-style: none;
@@ -65,7 +65,7 @@ html,body{
 	display: inline-block;
 	line-height: 50px;
 	padding:0px 40px;
-	border:1px solid rgba(0,0,0,.2);	
+	border:1px solid rgba(0,0,0,.2);
 	box-shadow:0 0 2px 0 rgba(0,0,0,.2);
 	cursor:pointer;
 	text-decoration: none;
@@ -99,33 +99,156 @@ html,body{
 }
 /******折线图***/
 
-
 /*开始监控start*/
 .flex {
-	display: flex;
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
 }
 
 .column {
-	flex-direction: column;
+    flex-direction: column;
 }
 
 .line {
-	padding: 1rem;
+    padding: 1rem;
 }
 
 .title {
-	background-color: rgba(135, 135, 135, 1);
-	color: white;
-	vertical-align: middle;
-	font-size: 1.4rem;
-	padding: .7rem 0 .7rem 1.2rem;
-	border-top: 1px solid rgba(240, 240, 240, 1);
-	border-left: 1px solid rgba(240, 240, 240, 1);
-	border-right: 1px solid rgba(240, 240, 240, 1);
+    background-color: rgba(135, 135, 135, 1);
+    color: white;
+    vertical-align: middle;
+    font-size: 1.3rem;
+    padding: .7rem 0 .7rem 1.2rem;
+    border-top: 1px solid rgba(240, 240, 240, 1);
+    border-left: 1px solid rgba(240, 240, 240, 1);
+    border-right: 1px solid rgba(240, 240, 240, 1);
 }
 
 .set-wrapper {
-	margin: 2rem 1rem;
+    margin: 2rem 1rem;
 }
 
+.set-wrapper > div:nth-child(2) {
+    background-color: rgba(87, 136, 135, 1);
+}
+
+.set-wrapper > div:nth-child(3) {
+    margin-top: 1.5rem;
+    background-color: rgba(193, 193, 193, 1);
+}
+
+.set-page-title {
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.node-line {
+    color: white;
+}
+
+.node-line > span {
+    flex: 1;
+}
+
+.node-line > select {
+    flex: 3;
+}
+
+.select-link {
+    height: 10rem;
+    margin-right: 2rem;
+    margin-left: 1rem;
+    background-color: white;
+    overflow: auto;
+}
+
+.select-link > li {
+    list-style: none;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    vertical-align: middle;
+    padding-left: .5rem;
+}
+
+.select-link > li:nth-child(2n) {
+    background-color: gainsboro;
+}
+
+.select-link button {
+    float: right;
+    margin-right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    margin-top: .25rem;
+    background: url(../img/del.png) no-repeat center;
+    background-size: 100%;
+}
+
+.link-wrapper {
+    padding: 1rem 0;
+}
+
+.link-wrapper > div:nth-child(1) {
+    border-right: 2px solid rgba(102, 102, 102, 1);
+    padding-right: 1rem;
+}
+
+.link-wrapper > div:nth-child(2) {
+    padding-left: 1rem;
+}
+
+.moreParasBtn > button {
+    height: 1.5rem;
+    width: 2rem;
+}
+
+.moreParasBtn:nth-child(1) > button {
+    background: url("../img/open.png") no-repeat center;
+    background-size: 100%;
+}
+
+.moreParasBtn:nth-child(2) > button {
+    background: url("../img/close.png") no-repeat center;
+    background-size: 50%;
+}
+
+button {
+    width: 5rem;
+    height: 2rem;
+    background-color: rgba(0, 0, 0, .7);
+    border: 0;
+    color: white;
+    border-radius: .3rem;
+}
+
+.select-status {
+    float: right;
+    margin-right: 1rem;
+}
+
+.select-status > span {
+    background-color: white;
+    padding: .2rem .5rem;
+    margin: 0 .2rem;
+}
+
+.start-monitor {
+    text-align: center;
+}
+
+.start-monitor > button {
+    width: 8rem;
+    height: 3rem;
+    font-size: 1.2rem;
+}
+
+.tips {
+    margin-left: 2rem;
+    color: rgba(251, 176, 22, 1);
+}
 /*开始监控end*/

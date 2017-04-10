@@ -5,6 +5,7 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
     $scope.allLinkArr = [];
     $scope.chooseLinkArr = [];
     $scope.moreParas = false;
+    $scope.tipsArr = null;
 
     //拓扑数据请求接口
     $scope.getSourceNode = function () {
@@ -46,8 +47,6 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
                 $scope.allLinkArr.push(source + " " + des);
             }
         });
-        // console.log($scope.allLinkArr);
-        // console.log(nodeArr);
         return nodeArr;
     };
 
@@ -58,11 +57,14 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
     //选择链路按钮处理事件
     $scope.confirmLink = function () {
         if ($scope.linkType == "all") {
-            $scope.chooseLinkArr = $scope.allLinkArr;
+            $scope.showTips("link", "");
+            $scope.allLinkArr.map(function (item) {
+                $scope.chooseLinkArr.push(item);
+            });
             return;
         }
         if (!$scope.sourceData || !$scope.desValue) {
-            alert("请选择链路节点");
+            $scope.showTips("link", "请选择链路节点");
             return;
         }
 
@@ -75,7 +77,6 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
 
     //删除某条链路事件
     $scope.delCurrItem = function (item) {
-        console.log(item);
         var i = $.inArray(item, $scope.chooseLinkArr);
         if (i < 0) {
             return;
@@ -87,21 +88,57 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
     //开始监控处理事件
     $scope.startMonitor = function () {
         if ($scope.chooseLinkArr.length < 1) {
-            alert("请选择监控链路");
+            $scope.showTips("paras", "");
+            $scope.showTips("link", "请选择监控链路");
             return;
         }
-        if (!$scope.monitorParas) {
-            alert("请选择监控参数");
+        var confirmParas = $scope.confimParas($scope.monitorParas);
+        if (confirmParas.length <= 0) {
+            $scope.showTips("link", "");
+            $scope.showTips("paras", "请选择监控参数");
             return;
         }
         //TODO
-        console.log($scope.monitorParas);
+        console.log(confirmParas);
         console.log($scope.chooseLinkArr);
+    };
+
+    $scope.confimParas = function (parasObj) {
+        var confirmParas = [];
+        for (var item in parasObj) {
+            if (parasObj.hasOwnProperty(item) && parasObj[item] == true) {
+                confirmParas.push(item);
+            }
+        }
+        return confirmParas;
     };
 
     $scope.toggleMoreParas = function () {
         $scope.moreParas = !$scope.moreParas;
     };
 
-    $scope.getSourceNode();
+    $scope.showTips = function (type, content) {
+        var doms = $scope.tipsArr;
+        if (!doms) {
+            return;
+        }
+        switch (type) {
+            case "paras":
+                doms[1].innerHTML = content;
+                console.log(doms[1]);
+                break;
+            case "link":
+                doms[0].innerHTML = content;
+                console.log(doms[0]);
+                break;
+            default:
+                break;
+        }
+    };
+
+    $(document).ready(function () {
+        $scope.tipsArr = $(".tips");
+        $scope.getSourceNode();
+        console.log($scope.tipsArr);
+    });
 });
